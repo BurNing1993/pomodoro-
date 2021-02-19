@@ -1,7 +1,11 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { Circle } from 'rc-progress'
 import { Status } from './utils/types'
-import { getNotificationPermission,notice,  showNotification} from './utils/notification'
+import {
+  getNotificationPermission,
+  notice,
+  showNotification,
+} from './utils/notification'
 import dayjs from 'dayjs'
 import duration from 'dayjs/plugin/duration'
 dayjs.extend(duration)
