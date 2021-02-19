@@ -1,5 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { Circle } from 'rc-progress'
+import { Status } from './utils/types'
+import { getNotificationPermission,notice,  showNotification} from './utils/notification'
 import dayjs from 'dayjs'
 import duration from 'dayjs/plugin/duration'
 dayjs.extend(duration)
@@ -7,6 +9,7 @@ dayjs.extend(duration)
 function App() {
   let timer: NodeJS.Timeout
   const [content, setContent] = useState('content')
+  const [status, setStatus] = useState<Status>(Status.REST)
   const [time, setTime] = useState<duration.Duration>(
     dayjs.duration(45, 'second')
   )
@@ -39,25 +42,44 @@ function App() {
     }, 1000)
   }
 
+  useEffect(() => {
+    getNotificationPermission()
+  }, [])
   return (
-    <div className="bg-blue-400 text-white text-center">
-      <div className="w-full max-w-xl mx-auto h-screen ">
-        <p>{content}</p>
-        <section className="p-16 mx-auto w-80 h-80 relative">
-          <div className="absolute top-32 left-1/2 transform -translate-x-1/2 z-20">
-            {time.format('mm:ss')}
-          </div>
-          <div>{total}</div>
-          <Circle
-            className="absolute top-0 left-0 z-10"
-            percent={percent}
-            strokeWidth={5}
-            trailWidth={5}
-            strokeColor="#000"
-          />
-        </section>
-        <button onClick={() => onStart()}>Start</button>
-      </div>
+    <div className="bg-blue-400 h-screen text-center text-white flex flex-col items-center justify-center relative">
+      <h2 className="text-4xl mb-4 tracking-tight font-extrabold text-gray-900 sm:text-5xl md:text-6xl">
+        {content}
+      </h2>
+      <section className="p-16 mx-auto w-80 h-80 relative">
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-20 text-2xl font-bold">
+          {time.format('mm : ss')}
+        </div>
+        <Circle
+          className="absolute top-0 left-0 z-10"
+          percent={percent}
+          strokeWidth={5}
+          trailWidth={5}
+          strokeColor="#000"
+        />
+      </section>
+      <button
+        className="mt-6 rounded-md text-white bg-indigo-500 hover:bg-indigo-700  py-2 md:py-4 text-base md:text-lg px-5 md:px-10 focus:outline-none"
+        onClick={() => onStart()}
+      >
+        Start
+      </button>
+      <button
+        className="mt-6 rounded-md text-white bg-indigo-500 hover:bg-indigo-700  py-2 md:py-4 text-base md:text-lg px-5 md:px-10 focus:outline-none"
+        onClick={notice}
+      >
+        通知
+      </button>
+      <button
+        className="mt-6 rounded-md text-white bg-indigo-500 hover:bg-indigo-700  py-2 md:py-4 text-base md:text-lg px-5 md:px-10 focus:outline-none"
+        onClick={showNotification}
+      >
+        showNotification
+      </button>
     </div>
   )
 }
