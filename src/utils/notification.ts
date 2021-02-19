@@ -18,11 +18,12 @@ export function notice() {
           body: 'body',
           icon: '/logo192.png',
           requireInteraction: true,
-          data:{
-            num:100
-          }
+          tag: new Date().getTime().toString(),
+          data: {
+            num: 100,
+          },
         })
-        console.log(notification);
+        console.log(notification)
         notification.onclick = function (event) {
           // event.preventDefault(); // prevent the browser from focusing the Notification's tab
           console.log(event)
@@ -38,29 +39,36 @@ export function notice() {
   }
 }
 
-export function showNotification() {
+export function showNotification(onWork: () => void, onRest: () => void) {
   Notification.requestPermission(function (result) {
     if (result === 'granted') {
+      const tag = new Date().getTime().toString()
       navigator.serviceWorker.ready.then(function (registration) {
-        console.log('registration',registration);
+        console.log('registration', registration)
         registration.showNotification('Vibration Sample', {
           body: 'Buzz! Buzz!',
           icon: '/logo192.png',
           vibrate: [200, 100, 200, 100, 200, 100, 200],
-          tag: 'vibration-sample',
+          tag,
+          data: {
+            onWork,
+            onRest,
+          },
           actions: [
             {
-              action: 'action1',
-              title: 'title1',
+              action: 'WORK',
+              title: 'Work',
             },
             {
-              action: 'action2',
-              title: 'title1',
+              action: 'REST',
+              title: 'Rest',
             },
           ],
+        })
+        registration.getNotifications({ tag }).then((notifications:Notification[]) => {
+          console.log(notifications)
         })
       })
     }
   })
 }
-

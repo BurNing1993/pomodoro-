@@ -49,10 +49,23 @@ function App() {
   useEffect(() => {
     getNotificationPermission()
   }, [])
+
+  const onWork = () => {
+    clearInterval(timer)
+    setStatus(Status.WORK)
+    onStart()
+  }
+  const onRest = () => {
+    clearInterval(timer)
+    setStatus(Status.REST)
+    onStart()
+  }
+
   return (
     <div className="bg-blue-400 h-screen text-center text-white flex flex-col items-center justify-center relative">
       <h2 className="text-4xl mb-4 tracking-tight font-extrabold text-gray-900 sm:text-5xl md:text-6xl">
         {content}
+        {status}
       </h2>
       <section className="p-16 mx-auto w-80 h-80 relative">
         <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-20 text-2xl font-bold">
@@ -80,7 +93,7 @@ function App() {
       </button>
       <button
         className="mt-6 rounded-md text-white bg-indigo-500 hover:bg-indigo-700  py-2 md:py-4 text-base md:text-lg px-5 md:px-10 focus:outline-none"
-        onClick={showNotification}
+        onClick={() => showNotification(onWork, onRest)}
       >
         showNotification
       </button>
