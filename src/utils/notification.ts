@@ -9,29 +9,23 @@ export function getNotificationPermission() {
   }
 }
 
-export function notice() {
+export function notice(title: string, body: string) {
   if (window.Notification) {
     Notification.requestPermission(function (status) {
       if (status === 'granted') {
-        console.log(status)
-        const notification = new Notification('Hi there!', {
-          body: 'body',
+        new Notification(title, {
+          body,
           icon: '/logo192.png',
-          requireInteraction: true,
-          tag: new Date().getTime().toString(),
-          data: {
-            num: 100,
-          },
+          silent: true,
         })
-        console.log(notification)
-        notification.onclick = function (event) {
-          // event.preventDefault(); // prevent the browser from focusing the Notification's tab
-          console.log(event)
-        }
-        notification.onclose = function (e) {
-          // event.preventDefault(); // prevent the browser from focusing the Notification's tab
-          console.log(e)
-        }
+        // notification.onclick = function (event) {
+        //   event.preventDefault(); // prevent the browser from focusing the Notification's tab
+        //   console.log(event)
+        // }
+        // notification.onclose = function (event) {
+        //   event.preventDefault(); // prevent the browser from focusing the Notification's tab
+        //   console.log(event)
+        // }
       } else {
         console.warn(status)
       }
@@ -39,7 +33,7 @@ export function notice() {
   }
 }
 
-export function showNotification(onWork: () => void, onRest: () => void) {
+export function showNotification() {
   Notification.requestPermission(function (result) {
     if (result === 'granted') {
       const tag = new Date().getTime().toString()
@@ -51,8 +45,7 @@ export function showNotification(onWork: () => void, onRest: () => void) {
           vibrate: [200, 100, 200, 100, 200, 100, 200],
           tag,
           data: {
-            onWork,
-            onRest,
+            tag,
           },
           actions: [
             {
@@ -65,9 +58,11 @@ export function showNotification(onWork: () => void, onRest: () => void) {
             },
           ],
         })
-        registration.getNotifications({ tag }).then((notifications:Notification[]) => {
-          console.log(notifications)
-        })
+        registration
+          .getNotifications({ tag })
+          .then((notifications: Notification[]) => {
+            console.log(notifications)
+          })
       })
     }
   })
