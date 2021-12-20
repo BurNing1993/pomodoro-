@@ -1,63 +1,40 @@
 {
   "name": "pomodoro",
-  "version": "0.1.0",
-  "private": true,
-  "dependencies": {
-    "@craco/craco": "^6.1.1",
-    "@tailwindcss/postcss7-compat": "^2.0.2",
-    "@testing-library/jest-dom": "^5.11.4",
-    "@testing-library/react": "^11.1.0",
-    "@testing-library/user-event": "^12.1.10",
-    "@types/jest": "^26.0.15",
-    "@types/node": "^12.0.0",
-    "@types/react": "^16.9.53",
-    "@types/react-dom": "^16.9.8",
-    "autoprefixer": "^9",
-    "dayjs": "^1.10.4",
-    "postcss": "^7",
-    "rc-dialog": "^8.5.1",
-    "rc-progress": "^3.1.3",
-    "react": "^17.0.1",
-    "react-dom": "^17.0.1",
-    "react-scripts": "4.0.2",
-    "tailwindcss": "npm:@tailwindcss/postcss7-compat",
-    "typescript": "^4.0.3",
-    "web-vitals": "^0.2.4",
-    "workbox-background-sync": "^5.1.3",
-    "workbox-broadcast-update": "^5.1.3",
-    "workbox-cacheable-response": "^5.1.3",
-    "workbox-core": "^5.1.3",
-    "workbox-expiration": "^5.1.3",
-    "workbox-google-analytics": "^5.1.3",
-    "workbox-navigation-preload": "^5.1.3",
-    "workbox-precaching": "^5.1.3",
-    "workbox-range-requests": "^5.1.3",
-    "workbox-routing": "^5.1.3",
-    "workbox-strategies": "^5.1.3",
-    "workbox-streams": "^5.1.3"
-  },
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/main/index.cjs",
   "scripts": {
-    "start": "craco start",
-    "build": "craco build",
-    "test": "craco test",
-    "eject": "react-scripts eject"
+    "pack:win": "npm run build && electron-builder build --config electron-builder.config.js --win",
+    "pack:mac": "npm run build && electron-builder build --config electron-builder.config.js --mac",
+    "dev": "node scripts/dev.js",
+    "build": "npm run check && node scripts/build.js",
+    "check": "npm run check:main && npm run check:renderer",
+    "check:main": "tsc --noEmit -p src/main/tsconfig.json",
+    "check:renderer": "tsc --noEmit -p src/renderer/tsconfig.json",
+    "postinstall": "electron-builder install-app-deps"
   },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BurNing1993/pomodoro.git"
   },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/BurNing1993/pomodoro/issues"
+  },
+  "homepage": "https://github.com/BurNing1993/pomodoro#readme",
+  "devDependencies": {
+    "@types/react": "^17.0.37",
+    "@types/react-dom": "^17.0.11",
+    "@vitejs/plugin-react": "^1.1.3",
+    "electron": "^16.0.5",
+    "electron-builder": "^22.14.5",
+    "typescript": "^4.5.4",
+    "vite": "^2.7.3"
+  },
+  "dependencies": {
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2"
   }
 }
