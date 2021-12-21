@@ -1,13 +1,12 @@
-import { useState } from 'react'
 import TitleBar from './components/TitleBar'
+import { Container, Main } from './style'
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <div className="App">
+    <Container>
       <TitleBar />
-    </div>
+      <Main>MAIN</Main>
+    </Container>
   )
 }
 

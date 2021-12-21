@@ -27,119 +27,100 @@ export const Icon = styled.div<{ close?: boolean }>`
   justify-content: center;
   align-items: center;
   &:hover {
-    background-color: ${(props) => (props.close ? '#cb2132' : '#333839')};
+    background-color: ${(props) =>
+      props.close ? '#cb2132' : 'var(--hover-background)'};
   }
 `
 
 export const Menu = styled.div`
-  width:40px;
+  width: 40px;
   height: 40px;
   display: flex;
   justify-content: center;
   align-items: center;
+  transition: transform 0.3s cubic-bezier(0.23, 1, 0.32, 1);
   &:hover {
-    background-color: #333839;
+    background-color: var(--hover-background);
   }
 `
 
-// export const Close2 = (
-//   <svg viewBox="0 0 12.6 12.6" height="20px" className="icon">
-//     <line
-//       fill="none"
-//       stroke="#F6F2EB"
-//       strokeWidth="2"
-//       strokeLinecap="round"
-//       strokeMiterlimit="10"
-//       x1="1"
-//       y1="1"
-//       x2="11.6"
-//       y2="11.6"
-//     />
-//     <line
-//       fill="none"
-//       stroke="#F6F2EB"
-//       strokeWidth="2"
-//       strokeLinecap="round"
-//       strokeMiterlimit="10"
-//       x1="11.6"
-//       y1="1"
-//       x2="1"
-//       y2="11.6"
-//     />
-//   </svg>
-// )
+export const RadioContainer = styled.div`
+  & > div {
+    margin-bottom: 10px;
+  }
+  & input {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
 
-export const Minimize = (
-  <svg viewBox="0 0 14 2" width="20px" height="30px">
-    <line
-      fill="none"
-      stroke="#F6F2EB"
-      strokeWidth="1"
-      strokeLinecap="round"
-      strokeMiterlimit="10"
-      x1="1"
-      y1="1"
-      x2="13"
-      y2="1"
-    />
-  </svg>
-)
+    border-radius: 50%;
+    width: 16px;
+    height: 16px;
 
-export const MenuIcon = (
-  <svg
-    width="24"
-    height="24"
-    viewBox="0 0 48 48"
-    fill="none"
-    xmlns="http://www.w3.org/2000/svg"
-  >
-    <rect width="48" height="48" fill="white" fill-opacity="0.01" />
-    <path
-      d="M7.94977 11.9498H39.9498"
-      stroke="#F6F2EB"
-      strokeWidth="4"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    />
-    <path
-      d="M7.94977 23.9498H39.9498"
-      stroke="#F6F2EB"
-      strokeWidth="4"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    />
-    <path
-      d="M7.94977 35.9498H39.9498"
-      stroke="#F6F2EB"
-      strokeWidth="4"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    />
-  </svg>
-)
+    border: 2px solid #999;
+    transition: 0.2s all linear;
+    outline: none;
+    margin-right: 5px;
 
-export const Close = (
-  <svg
-    width="24"
-    height="24"
-    viewBox="0 0 48 48"
-    fill="none"
-    xmlns="http://www.w3.org/2000/svg"
-  >
-    <rect width="48" height="48" fill="white" fill-opacity="0.01" />
-    <path
-      d="M8 8L40 40"
-      stroke="#F6F2EB"
-      strokeWidth="4"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    />
-    <path
-      d="M8 40L40 8"
-      stroke="#F6F2EB"
-      strokeWidth="4"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    />
-  </svg>
-)
+    position: relative;
+    top: 3px;
+  }
+  & input:checked {
+    border: 6px solid #fff;
+  }
+`
+export const Remember = styled.div`
+  padding-top: 10px;
+  & input {
+    width: 16px;
+    height: 16px;
+    border: 2px solid #999;
+    transition: 0.2s all linear;
+    margin-right: 5px;
+    position: relative;
+    top: 3px;
+  }
+`
+
+export const Footer = styled.footer`
+  display: flex;
+  justify-content: flex-end;
+`
+
+export const Button = styled.button<{ primary?: boolean }>`
+  /* Adapt the colors based on primary prop */
+  background: ${(props) => (props.primary ? '#fff' : '#181a1b')};
+  color: ${(props) => (props.primary ? '#181a1b' : '#fff')};
+  font-size: 1rem;
+  margin: 0.5rem;
+  padding: 0.25rem 1rem;
+  border: ${(props) =>
+    props.primary ? '2px solid  #fff' : '2px solid #181a1b'};
+  border-radius: 3px;
+  cursor: pointer;
+`
+
+export const Drawer = styled.div`
+  transition: transform 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+  height: calc(100vh - 40px);
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  z-index: 99;
+  background-color: var(--background-color);
+  color: var(--text-color);
+`
+
+export const SettingItem = styled.p`
+  font-size: 16px;
+  line-height: 16px;
+  display:flex;
+  align-items:center;
+  & > label {
+    margin-right: 6px;
+    &::after {
+      content: ' : ';
+    }
+  }
+`
