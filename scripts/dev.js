@@ -36,8 +36,8 @@ async function start() {
 function startElectron() {
   logger.info('start electron', defaultLogOptions)
   if (electronProcess != null) {
-    electronProcess.kill('SIGHUP')
-    electronProcess = null
+    electronProcess.kill()
+    // electronProcess = null
   }
   electronProcess = spawn(electron, [path.join(ROOT, 'dist/main/index.cjs')])
   // electronProcess.stdout.on('data', (data) => {
@@ -47,9 +47,10 @@ function startElectron() {
     logger.error(data.toString(), defaultLogOptions)
   })
   electronProcess.on('close', (code) => {
-    electronProcess = null
     logger.error(`child process exited with code ${code}`, defaultLogOptions)
-    process.exit()
+    if (code===0) {
+      process.exit()
+    }
   })
 }
 

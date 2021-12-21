@@ -13,7 +13,7 @@ export default defineConfig({
   build: {
     sourcemap: true,
     target: `chrome${versions.chrome}`,
-    outDir: path.join(ROOT, 'dist/renderer/main'),
+    outDir: path.join(ROOT, 'dist/renderer'),
     rollupOptions: {
       external: ['electron', ...builtinModules],
     },

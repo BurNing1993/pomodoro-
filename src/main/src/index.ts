@@ -4,6 +4,8 @@ import {
   create as createMainWindow,
   focus as focusMainWindow,
 } from './windows/main'
+import handleIPC from './ipc';
+import setTray from './tray';
 
 const gotTheLock = app.requestSingleInstanceLock()
 
@@ -16,9 +18,13 @@ if (!gotTheLock) {
   })
   app.whenReady().then(() => {
     createMainWindow()
+    handleIPC()
+    setTray()
+    app.applicationMenu = null
   })
 }
 
 if (import.meta.env.DEV) {
   loadDevTools()
 }
+

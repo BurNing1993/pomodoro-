@@ -1,7 +1,7 @@
 const { version, author } = require('./package.json')
 
 const year = new Date().getFullYear()
-const productName = 'ElectronViteApp'
+const productName = '番茄钟'
 
 /**
  * @type {import('electron-builder').Configuration}
@@ -9,7 +9,7 @@ const productName = 'ElectronViteApp'
  */
 module.exports = {
   productName,
-  appId: "com.example.app",
+  appId: "com.joey.pomodoro",
   copyright: `Copyright © ${year} ${author}`,
   directories: {
     output: 'release',
