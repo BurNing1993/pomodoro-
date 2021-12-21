@@ -8,7 +8,7 @@
   fill="none"
   xmlns="http://www.w3.org/2000/svg"
 >
-  <rect width="48" height="48" fill="white" fill-opacity="0.01" />
+  <rect width="48" height="48" fill="white" fillOpacity="0.01" />
   <path
     d="M8 8L40 40"
     stroke="#333"
@@ -34,7 +34,7 @@
   fill="none"
   xmlns="http://www.w3.org/2000/svg"
 >
-  <rect width="48" height="48" fill="white" fill-opacity="0.01" />
+  <rect width="48" height="48" fill="white" fillOpacity="0.01" />
   <path
     fill-rule="evenodd"
     clip-rule="evenodd"

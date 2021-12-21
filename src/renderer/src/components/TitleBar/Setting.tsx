@@ -1,10 +1,16 @@
-import React, { memo, useState } from 'react'
-import { Drawer, SettingItem } from './style'
+import React, { memo, useEffect, useState } from 'react'
+import { Drawer, RadioContainer, SettingItem } from './style'
 import Tabs, { TabPane } from 'rc-tabs'
 import Switch from 'rc-switch'
-import {Theme} from '../../../../common/types'
-import { getLocalTheme } from './helper'
+import { Theme } from '../../../../common/types'
+import {
+  getLocalCloseAction,
+  getLocalTheme,
+  setLocalCloseAction,
+} from './helper'
 import { changeDarkMode } from '../../utils/ipc'
+import { CloseAction } from './CloseDialog'
+import About from './About'
 
 interface Props {
   open: boolean
@@ -13,11 +19,17 @@ interface Props {
 
 const Setting: React.FC<Props> = ({ open, onClose }) => {
   const [theme, setTheme] = useState<Theme>(getLocalTheme())
-  const onThemeChange = (checked:boolean) => {
-    const theme:Theme = checked ?'dark':'light'
+  const [action, setAction] = useState<CloseAction>(getLocalCloseAction())
+  const onThemeChange = (checked: boolean) => {
+    const theme: Theme = checked ? 'dark' : 'light'
     setTheme(theme)
     changeDarkMode(theme)
   }
+
+  useEffect(() => {
+    setLocalCloseAction(action)
+  }, [action])
+
   return (
     <Drawer
       style={{
@@ -36,9 +48,40 @@ const Setting: React.FC<Props> = ({ open, onClose }) => {
               onChange={onThemeChange}
             />
           </SettingItem>
+          <SettingItem>
+            <label style={{ paddingTop: '2px' }}>关闭主面板</label>
+            <RadioContainer>
+              <div>
+                <input
+                  type="radio"
+                  id="hide"
+                  name="close"
+                  value="hide"
+                  onChange={(e) =>
+                    setAction(e.target.checked ? 'hide' : 'close')
+                  }
+                  checked={action === 'hide'}
+                />
+                <label htmlFor="hide">最小化到系统托盘</label>
+              </div>
+              <div>
+                <input
+                  type="radio"
+                  id="close"
+                  name="close"
+                  value="close"
+                  onChange={(e) =>
+                    setAction(e.target.checked ? 'close' : 'hide')
+                  }
+                  checked={action === 'close'}
+                />
+                <label htmlFor="close">关闭应用</label>
+              </div>
+            </RadioContainer>
+          </SettingItem>
         </TabPane>
         <TabPane tab="关于" key="2">
-          关于
+          <About />
         </TabPane>
       </Tabs>
     </Drawer>

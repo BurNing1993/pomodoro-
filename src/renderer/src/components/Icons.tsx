@@ -24,7 +24,7 @@ export const MenuIcon = (
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
   >
-    <rect width="48" height="48" fill="white" fill-opacity="0.01" />
+    <rect width="48" height="48" fill="white" fillOpacity="0.01" />
     <path
       d="M7.94977 11.9498H39.9498"
       stroke="#F6F2EB"
@@ -57,7 +57,7 @@ export const Close = (
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
   >
-    <rect width="48" height="48" fill="white" fill-opacity="0.01" />
+    <rect width="48" height="48" fill="white" fillOpacity="0.01" />
     <path
       d="M8 8L40 40"
       stroke="#F6F2EB"

@@ -112,15 +112,19 @@ export const Drawer = styled.div`
   color: var(--text-color);
 `
 
-export const SettingItem = styled.p`
+export const SettingItem = styled.div`
   font-size: 16px;
   line-height: 16px;
+  padding:10px 0;
   display:flex;
-  align-items:center;
   & > label {
     margin-right: 6px;
     &::after {
       content: ' : ';
     }
   }
+`
+
+export const AboutTitle = styled.h3`
+  text-align:center;
 `
