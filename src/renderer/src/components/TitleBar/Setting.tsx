@@ -2,6 +2,7 @@ import React, { memo, useEffect, useState } from 'react'
 import { Drawer, RadioContainer, SettingItem } from './style'
 import Tabs, { TabPane } from 'rc-tabs'
 import Switch from 'rc-switch'
+import InputNumber from 'rc-input-number'
 import { Theme } from '../../../../common/types'
 import {
   getLocalCloseAction,
@@ -78,6 +79,9 @@ const Setting: React.FC<Props> = ({ open, onClose }) => {
                 <label htmlFor="close">关闭应用</label>
               </div>
             </RadioContainer>
+          </SettingItem>
+          <SettingItem>
+            <InputNumber />
           </SettingItem>
         </TabPane>
         <TabPane tab="关于" key="2">

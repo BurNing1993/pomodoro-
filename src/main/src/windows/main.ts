@@ -9,6 +9,7 @@ export function create() {
     width: 400,
     height: 600,
     minWidth: 400,
+    minHeight:600,
     show: false,
     frame: false,
     maximizable: false,
