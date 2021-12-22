@@ -14,7 +14,7 @@ export const Control = styled.div`
   align-items: center;
 `
 
-export const Title = styled.div`
+export const Title = styled.h3`
   flex: 1;
   text-align: center;
   -webkit-app-region: drag;
@@ -115,8 +115,8 @@ export const Drawer = styled.div`
 export const SettingItem = styled.div`
   font-size: 16px;
   line-height: 16px;
-  padding:10px 0;
-  display:flex;
+  padding: 10px 0;
+  display: flex;
   & > label {
     margin-right: 6px;
     &::after {
@@ -125,6 +125,12 @@ export const SettingItem = styled.div`
   }
 `
 
-export const AboutTitle = styled.h3`
-  text-align:center;
+export const AboutContainer = styled.article`
+  text-align: center;
+  &>p{
+    font-size:18px;
+  }
+  & .label::after {
+    content: ' : ';
+  }
 `
