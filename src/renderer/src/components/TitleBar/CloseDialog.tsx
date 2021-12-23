@@ -8,12 +8,12 @@ import {
   setLocalCloseAction,
   setLocalRemember,
 } from './helper'
+import { CloseAction } from '../../types'
 
 interface Props {
   visible: boolean
   onClose: () => void
 }
-export type CloseAction = 'close' | 'hide'
 
 const CloseDialog: React.FC<Props> = ({ visible, onClose }) => {
   const [action, setAction] = useState<CloseAction>(getLocalCloseAction())

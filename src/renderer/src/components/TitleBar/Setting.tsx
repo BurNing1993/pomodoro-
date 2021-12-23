@@ -2,7 +2,6 @@ import React, { memo, useEffect, useState } from 'react'
 import { Drawer, RadioContainer, SettingItem } from './style'
 import Tabs, { TabPane } from 'rc-tabs'
 import Switch from 'rc-switch'
-import InputNumber from 'rc-input-number'
 import { Theme } from '../../../../common/types'
 import {
   getLocalCloseAction,
@@ -10,8 +9,8 @@ import {
   setLocalCloseAction,
 } from './helper'
 import { changeDarkMode } from '../../utils/ipc'
-import { CloseAction } from './CloseDialog'
 import About from './About'
+import { CloseAction } from '../../types'
 
 interface Props {
   open: boolean
@@ -38,7 +37,10 @@ const Setting: React.FC<Props> = ({ open, onClose }) => {
       }}
     >
       <Tabs defaultActiveKey="1">
-        <TabPane tab="通用" key="1">
+        <TabPane tab="Timer" key="1">
+          Timer
+        </TabPane>
+        <TabPane tab="通用" key="2">
           <SettingItem>
             <label htmlFor="theme">主题</label>
             <Switch
@@ -80,11 +82,8 @@ const Setting: React.FC<Props> = ({ open, onClose }) => {
               </div>
             </RadioContainer>
           </SettingItem>
-          <SettingItem>
-            <InputNumber />
-          </SettingItem>
         </TabPane>
-        <TabPane tab="关于" key="2">
+        <TabPane tab="关于" key="3">
           <About />
         </TabPane>
       </Tabs>

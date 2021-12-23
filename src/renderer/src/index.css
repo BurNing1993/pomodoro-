@@ -1,7 +1,7 @@
 @import 'rc-dialog/assets/index.css';
 @import 'rc-tabs/assets/index.css';
 @import 'rc-switch/assets/index.css';
-@import 'rc-input-number/assets/index.css';
+@import 'rc-slider/assets/index.css';
 
 :root {
   --background-color: #ffffff;

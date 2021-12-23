@@ -17,6 +17,16 @@ const About: React.FC = () => {
         {version}
       </p>
       <p>
+        <span className="label">介绍</span>
+        <ExternalLink
+          href="https://baike.baidu.com/item/%E7%95%AA%E8%8C%84%E5%B7%A5%E4%BD%9C%E6%B3%95/6353502"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          番茄工作法
+        </ExternalLink>
+      </p>
+      <p>
         <span className="label">主页</span>
         <ExternalLink
           href="https://github.com/BurNing1993/pomodoro"
@@ -37,7 +47,7 @@ const About: React.FC = () => {
         </ExternalLink>
       </p>
       <p>
-        copyright: Copyright © {year} {author},
+        copyright: Copyright © {year} {author}
       </p>
     </AboutContainer>
   )
