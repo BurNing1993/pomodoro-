@@ -1,40 +1,8 @@
-import { TimerSetting } from '../types'
+import { RoundTime } from '../types'
 
-const REST_TIME = 'rest_time'
-const DEFAULT_REST_TIME = 5
-
-export function getRestTime(): number {
-  const val = localStorage[REST_TIME]
-  if (val) {
-    return Number(val) || DEFAULT_REST_TIME
-  } else {
-    return DEFAULT_REST_TIME
-  }
-}
-
-export function setRestTime(t: number) {
-  localStorage[REST_TIME] = t
-}
-
-const FOCUS_TIME = 'focus_time'
-const DEFAULT_FOCUS_TIME = 25
-
-export function getFocusTime(): number {
-  const val = localStorage[FOCUS_TIME]
-  if (val) {
-    return Number(val) || DEFAULT_FOCUS_TIME
-  } else {
-    return DEFAULT_FOCUS_TIME
-  }
-}
-
-export function setFocusTime(t: number) {
-  localStorage[FOCUS_TIME] = t
-}
-
-const TIMER_SETTING = 'TimerSetting'
-export function getLocalTimerSetting(): TimerSetting {
-  const localValue = localStorage[TIMER_SETTING]
+const ROUND_TIME = 'round_time'
+export function getRoundTime(): RoundTime {
+  const localValue = localStorage[ROUND_TIME]
   if (localValue) {
     try {
       const setting = JSON.parse(localValue)
@@ -44,13 +12,43 @@ export function getLocalTimerSetting(): TimerSetting {
     }
   }
   return {
-    focus: 25,
-    shortBreak: 5,
-    longBreak: 15,
-    round: 4,
+    SHORT_BREAK: 5,
+    LONG_BREAK: 15,
+    FOCUS: 25,
   }
 }
 
-export function setLocalTimerSetting(setting: TimerSetting) {
-  localStorage[TIMER_SETTING] = JSON.stringify(setting)
+export function setLocalTimerSetting(roundTime: RoundTime) {
+  localStorage[ROUND_TIME] = JSON.stringify(roundTime)
+}
+
+const AUTO_START = 'auto_start'
+
+export function getAutoStart(): boolean {
+  const val = localStorage[AUTO_START]
+  if (val) {
+    return val === 'true'
+  } else {
+    return false
+  }
+}
+
+export function setAutoStart(autoStart: boolean) {
+  localStorage[AUTO_START] = String(autoStart)
+}
+
+// 总轮次
+const TOTAL_ROUNDS = 'total_rounds'
+
+export function getTotalRounds(): number {
+  const val = localStorage[TOTAL_ROUNDS]
+  if (val) {
+    return Number(val) || 4
+  } else {
+    return 4
+  }
+}
+
+export function setTotalRounds(totalRounds: number) {
+  localStorage[TOTAL_ROUNDS] = totalRounds
 }

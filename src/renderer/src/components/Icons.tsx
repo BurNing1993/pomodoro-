@@ -22,7 +22,6 @@ export const MenuIcon = (
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
   >
-    <rect width="48" height="48" fill="white" fillOpacity="0.01" />
     <path
       d="M7.94977 11.9498H39.9498"
       stroke="#F6F2EB"
@@ -55,7 +54,6 @@ export const Close = (
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
   >
-    <rect width="48" height="48" fill="white" fillOpacity="0.01" />
     <path
       d="M8 8L40 40"
       stroke="#F6F2EB"
@@ -108,7 +106,6 @@ export const Play = (
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
   >
-    <rect width="48" height="48" fill="white" fillOpacity="0.01" />
     <path
       d="M24 44C35.0457 44 44 35.0457 44 24C44 12.9543 35.0457 4 24 4C12.9543 4 4 12.9543 4 24C4 35.0457 12.9543 44 24 44Z"
       fill="none"
@@ -134,7 +131,6 @@ export const Pause = (
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
   >
-    <rect width="48" height="48" fill="white" fillOpacity="0.01" />
     <path
       d="M24 44C35.0457 44 44 35.0457 44 24C44 12.9543 35.0457 4 24 4C12.9543 4 4 12.9543 4 24C4 35.0457 12.9543 44 24 44Z"
       fill="none"
@@ -238,7 +234,6 @@ export const Volume = (
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
   >
-    <rect width="48" height="48" fill="white" fillOpacity="0.01" />
     <path
       d="M24 6V42C17 42 11.7985 32.8391 11.7985 32.8391H6C4.89543 32.8391 4 31.9437 4 30.8391V17.0108C4 15.9062 4.89543 15.0108 6 15.0108H11.7985C11.7985 15.0108 17 6 24 6Z"
       fill="none"
@@ -270,7 +265,6 @@ export const Next = (
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
   >
-    <rect width="48" height="48" fill="white" fillOpacity="0.01" />
     <path
       d="M14 12L26 24L14 36"
       stroke="#333"

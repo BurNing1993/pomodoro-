@@ -43,4 +43,7 @@ export const Footer = styled.div`
 
 export const Icon = styled.span`
   cursor: pointer;
+  & svg:hover *{
+    stroke: green;
+  }
 `

@@ -2235,7 +2235,7 @@ readable-stream@^2.2.2:
 
 recoil@^0.5.2:
   version "0.5.2"
-  resolved "https://registry.npmmirror.com/recoil/download/recoil-0.5.2.tgz#61fecce3b4dc91127a595586cf7369e2811ba024"
+  resolved "https://registry.npmmirror.com/recoil/download/recoil-0.5.2.tgz?cache=0&sync_timestamp=1636308929470&other_urls=https%3A%2F%2Fregistry.npmmirror.com%2Frecoil%2Fdownload%2Frecoil-0.5.2.tgz#61fecce3b4dc91127a595586cf7369e2811ba024"
   integrity sha512-Edibzpu3dbUMLy6QRg73WL8dvMl9Xqhp+kU+f2sJtXxsaXvAlxU/GcnDE8HXPkprXrhHF2e6SZozptNvjNF5fw==
   dependencies:
     hamt_plus "1.0.2"

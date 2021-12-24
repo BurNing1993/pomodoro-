@@ -1,13 +1,34 @@
 import { atom } from 'recoil'
-import { Action, TimerSetting } from '../types'
-import { getLocalTimerSetting } from '../utils'
+import { Round, RoundTime } from '../types'
+import { getRoundTime, getAutoStart, setAutoStart, getTotalRounds } from '../utils'
 
-export const timerSettingState = atom<TimerSetting>({
-  key: 'timerSettingState',
-  default: getLocalTimerSetting(),
+// timer 时间设置
+export const roundTimeState = atom<RoundTime>({
+  key: 'roundTimeState',
+  default: getRoundTime(),
 })
 
-export const currentActionState = atom<Action>({
+// 当前轮次
+export const currentRoundState = atom<Round>({
   key: 'currentActionState',
-  default: 'focus',
+  default: 'FOCUS',
+})
+
+// 总轮次
+export const totalRoundsState = atom<number>({
+  key: 'totalRoundsState',
+  default: getTotalRounds()
+})
+
+// 是否自动开始
+export const autoStartState = atom<boolean>({
+  key: 'autoStartState',
+  default: getAutoStart(),
+  effects_UNSTABLE: [
+    ({ onSet }) => {
+      onSet((newVal) => {
+        setAutoStart(newVal)
+      })
+    },
+  ],
 })
