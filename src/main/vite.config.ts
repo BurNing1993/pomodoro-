@@ -2,7 +2,8 @@ import { defineConfig } from 'vite'
 import { builtinModules } from 'module'
 import * as path from 'path'
 import { versions } from '../../electron-vendors.config'
-import { ROOT } from '../common/constant'
+
+const ROOT = path.resolve(__dirname,'../../')
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => {

@@ -1,6 +1,7 @@
 import { app, BrowserWindow } from 'electron'
 import * as path from 'path'
-import { ROOT } from '../../../common/constant'
+
+const ROOT = path.resolve(__dirname, '../../../')
 
 let win: BrowserWindow | null = null
 
