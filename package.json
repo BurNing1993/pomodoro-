@@ -2,7 +2,7 @@
   "name": "pomodoro",
   "version": "0.1.2",
   "description": "",
-  "main": "dist/main/index.cjs",
+  "main": "./dist/main/index.cjs",
   "scripts": {
     "pack:win": "npm run build && electron-builder build --config electron-builder.config.js --win",
     "pack:mac": "npm run build && electron-builder build --config electron-builder.config.js --mac",
