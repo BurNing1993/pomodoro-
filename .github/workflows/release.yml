@@ -2,9 +2,10 @@ name: Build/release
 
 on:
   push:
+    branches: [ main ]
     # Sequence of patterns matched against refs/tags
-    tags:
-      - 'v*' # Push events to matching v*, i.e. v1.0, v20.15.10
+    # tags:
+    #  - 'v*' # Push events to matching v*, i.e. v1.0, v20.15.10
 
 jobs:
   release:
@@ -30,7 +31,11 @@ jobs:
       - name: publish windows app
         if: matrix.os == 'windows-latest'
         run: yarn package --win
+        env: 
+          GH_TOKEN: ${{secrets.GH_TOKEN}}
 
       - name: publish mac app
         if: matrix.os == 'macos-latest'
         run: yarn package --mac
+        env: 
+          GH_TOKEN: ${{secrets.GH_TOKEN}}
