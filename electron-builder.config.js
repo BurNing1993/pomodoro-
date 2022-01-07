@@ -15,7 +15,7 @@ module.exports = {
     output: 'release',
     buildResources: 'resources',
   },
-  files: ['dist'],
+  files: ['./dist/**/*'],
   win: {
     icon: 'resources/icon.ico',
     target: {
