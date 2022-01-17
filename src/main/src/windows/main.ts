@@ -1,8 +1,6 @@
 import { app, BrowserWindow } from 'electron'
 import * as path from 'path'
 
-const ROOT = path.resolve(__dirname, '../../../')
-
 let win: BrowserWindow | null = null
 
 export function create() {
@@ -10,7 +8,7 @@ export function create() {
     width: 400,
     height: 600,
     minWidth: 400,
-    minHeight:600,
+    minHeight: 600,
     show: false,
     frame: false,
     maximizable: false,
@@ -25,7 +23,7 @@ export function create() {
   if (import.meta.env.DEV) {
     win.loadURL('http://localhost:3000')
   } else {
-    win.loadFile(path.join(ROOT, 'dist/renderer/index.html'))
+    win.loadFile(path.resolve(__dirname, '../renderer/index.html'))
   }
 }
 
