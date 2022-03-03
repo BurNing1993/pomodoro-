@@ -1,73 +1,55 @@
+//@ts-check
+const webpack = require('webpack')
 const { spawn } = require('child_process')
-const { build, createLogger, createServer } = require('vite')
 const electron = require('electron')
 const path = require('path')
+const config = require('../config/webpack.main.config')
 
 const ROOT = path.resolve(__dirname, '../')
+const now = () => `[${new Date().toLocaleString()}]`
 
 /** @type import('child_process').ChildProcess  */
 let electronProcess
 
-const logger = createLogger('info', {
-  prefix: '[main]',
+const compiler = webpack({
+  ...config,
+  mode: 'development',
 })
 
-const defaultLogOptions = {
-  timestamp: true,
-}
-
-async function start() {
-  await startRendererServer(path.join(ROOT, 'src/renderer/vite.config.ts'))
-  const watcher = await build({
-    configFile: path.join(ROOT, 'src/main/vite.config.ts'),
-    mode: 'development',
-    build: {
-      watch: {},
-    },
-  })
-  watcher.on('event', function (e) {
-    logger.info(`build ${e.code}`, defaultLogOptions)
-    if (e.code === 'END') {
+const watching = compiler.watch(
+  {
+    aggregateTimeout: 3000,
+    poll: undefined,
+  },
+  (err, stats) => {
+    if (err || stats.hasErrors()) {
+      console.error('Error', err)
+      process.exit()
+    } else {
+      console.log(now(), stats.toJson('summary'))
       startElectron()
     }
-  })
-}
+  }
+)
 
 function startElectron() {
-  logger.info('start electron', defaultLogOptions)
+  console.log(now(), 'start electron')
   if (electronProcess != null) {
+    // windows 上，不支持 signal 参数
     electronProcess.kill()
     // electronProcess = null
   }
-  electronProcess = spawn(electron, [path.join(ROOT, 'dist/main/index.cjs')])
+  // @ts-ignore
+  electronProcess = spawn(electron, [path.join(ROOT, 'dist/main.js')])
   // electronProcess.stdout.on('data', (data) => {
   //   logger.info(data.toString(), defaultLogOptions)
   // })
   electronProcess.stderr.on('data', (data) => {
-    logger.error(data.toString(), defaultLogOptions)
+    console.log(now(), data.toString())
   })
   electronProcess.on('close', (code) => {
-    logger.error(`child process exited with code ${code}`, defaultLogOptions)
-    if (code===0) {
-      process.exit()
-    }
+    watching.close(() => {
+      console.log(now(), `child process exited with code ${code}`)
+    })
   })
 }
-
-async function startRendererServer(configFile, port = 3000) {
-  const viteDevServer = await createServer({
-    configFile,
-    mode: 'development',
-    server: {
-      port,
-    },
-  })
-  await viteDevServer.listen()
-  logger.info(`renderer server start at: http://localhost:${port}`, {
-    ...defaultLogOptions,
-    prefix: ['renderer'],
-  })
-  return viteDevServer
-}
-
-start()

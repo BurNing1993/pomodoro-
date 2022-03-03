@@ -2,50 +2,39 @@
   "name": "pomodoro",
   "version": "0.1.8",
   "description": "",
-  "main": "./dist/main/index.cjs",
+  "main": "./dist/main/index.js",
   "scripts": {
     "pack:win": "npm run build && electron-builder build --config electron-builder.config.js --win",
     "pack:mac": "npm run build && electron-builder build --config electron-builder.config.js --mac",
     "package": "npm run build && electron-builder build --config electron-builder.config.js --publish always",
-    "dev": "node scripts/dev.js",
-    "build": "npm run check && node scripts/build.js",
-    "check": "npm run check:main && npm run check:renderer",
-    "check:main": "tsc --noEmit -p src/main/tsconfig.json",
-    "check:renderer": "tsc --noEmit -p src/renderer/tsconfig.json",
+    "start": "node scripts/dev.js",
+    "build": "npm run build:main && npm run build:renderer",
+    "build:renderer": "cd src/renderer && npm run build",
+    "build:main": "webpack -c config/webpack.main.config.js",
     "postinstall": "electron-builder install-app-deps"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/BurNing1993/pomodoro.git"
+    "url": "git+https://github.com/joey2217/pomodoro.git"
   },
   "keywords": [],
   "author": "Joey",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/BurNing1993/pomodoro/issues"
+    "url": "https://github.com/joey2217/pomodoro/issues"
   },
-  "homepage": "https://github.com/BurNing1993/pomodoro#readme",
-  "devDependencies": {
-    "@types/react": "^17.0.37",
-    "@types/react-dom": "^17.0.11",
-    "@types/styled-components": "^5.1.18",
-    "@vitejs/plugin-react": "^1.1.3",
-    "electron": "^16.0.5",
-    "electron-builder": "^22.14.5",
-    "prettier": "^2.5.1",
-    "typescript": "^4.5.4",
-    "vite": "^2.7.3"
-  },
+  "homepage": "https://github.com/joey2217/pomodoro#readme",
   "dependencies": {
-    "dayjs": "^1.10.7",
-    "rc-dialog": "^8.6.0",
-    "rc-progress": "^3.1.4",
-    "rc-slider": "^9.7.5",
-    "rc-switch": "^3.2.2",
-    "rc-tabs": "^11.10.5",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
-    "recoil": "^0.5.2",
-    "styled-components": "^5.3.3"
+    "electron-updater": "^4.6.5"
+  },
+  "devDependencies": {
+    "copy-webpack-plugin": "^10.2.4",
+    "electron": "^17.1.0",
+    "electron-builder": "^22.14.13",
+    "prettier": "^2.5.1",
+    "ts-loader": "^9.2.7",
+    "typescript": "^4.6.2",
+    "webpack": "^5.69.1",
+    "webpack-cli": "^4.9.2"
   }
 }
