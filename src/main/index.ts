@@ -1,4 +1,6 @@
 import { app } from 'electron'
+import handleIpc from './ipc'
+import { setTray } from './tray'
 import {
   create as createMainWindow,
   focus as focusMainWindow,
@@ -15,5 +17,7 @@ if (!gotTheLock) {
   })
   app.whenReady().then(() => {
     createMainWindow()
+    handleIpc()
+    setTray()
   })
 }

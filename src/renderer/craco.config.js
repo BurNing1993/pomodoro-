@@ -2,7 +2,7 @@
 module.exports = {
   webpack: {
     configure: {
-    //   target: 'electron-renderer',
+      target: 'electron-renderer',
     },
   },
 }

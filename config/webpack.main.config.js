@@ -1,6 +1,6 @@
 // @ts-check
 const path = require('path')
-// const CopyPlugin = require('copy-webpack-plugin')
+const CopyPlugin = require('copy-webpack-plugin')
 
 const ROOT = path.resolve(__dirname, '../')
 
@@ -31,14 +31,14 @@ const config = {
     extensions: ['.ts', '.js'],
   },
   plugins: [
-    // new CopyPlugin({
-    //   patterns: [
-    //     {
-    //       from: path.join(ROOT, 'src/main/assets'),
-    //       to: path.join(ROOT, 'dist/assets'),
-    //     },
-    //   ],
-    // }),
+    new CopyPlugin({
+      patterns: [
+        {
+          from: path.join(ROOT, 'src/main/assets'),
+          to: path.join(ROOT, 'dist/assets'),
+        },
+      ],
+    }),
   ],
 }
 
