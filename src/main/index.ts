@@ -1,6 +1,7 @@
 import { app } from 'electron'
 import handleIpc from './ipc'
 import { setTray } from './tray'
+import { checkUpdate } from './updater'
 import {
   create as createMainWindow,
   focus as focusMainWindow,
@@ -19,5 +20,6 @@ if (!gotTheLock) {
     createMainWindow()
     handleIpc()
     setTray()
+    checkUpdate()
   })
 }

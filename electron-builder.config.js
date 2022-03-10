@@ -55,4 +55,7 @@ module.exports = {
   extraMetadata: {
     version,
   },
+  publish:{
+    provider:'github',
+  },
 }

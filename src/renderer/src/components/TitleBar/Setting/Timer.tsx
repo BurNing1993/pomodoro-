@@ -10,9 +10,9 @@ const Timer: React.FC = () => {
   return (
     <div className="text-center p-2">
       <div>
-        <div>FOUCS</div>
+        <div className="py-2">{ROUND_CONFIG.FOCUS.title}</div>
         <div>
-          <span className="bg-gray-400">{focusTime}:00</span>
+          <span className="bg-gray-400 p-1">{focusTime}:00</span>
         </div>
         <Slider
           handleStyle={{
@@ -29,9 +29,9 @@ const Timer: React.FC = () => {
         />
       </div>
       <div>
-        <div>BREAK</div>
+        <div className="py-2">{ROUND_CONFIG.BREAK.title}</div>
         <div>
-          <span className="bg-gray-400">{breakTime}:00</span>
+          <span className="bg-gray-400 py-1">{breakTime}:00</span>
         </div>
         <Slider
           handleStyle={{

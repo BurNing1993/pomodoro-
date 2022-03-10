@@ -20,6 +20,7 @@ import { notice } from '../../utils/notice'
 
 dayjs.extend(duration)
 let timer: NodeJS.Timeout
+let init = true
 
 const Timer: React.FC = () => {
   const focusTime = useRecoilValue(focusTimeState)
@@ -53,7 +54,6 @@ const Timer: React.FC = () => {
       if (!autoStart) {
         setPaused(true)
       }
-      notice(round)
       const newRound: Round = round === 'FOCUS' ? 'BREAK' : 'FOCUS'
       setRound(newRound)
     }
@@ -66,6 +66,14 @@ const Timer: React.FC = () => {
       setRoundDuration(dayjs.duration(breakTime, 'minute'))
     }
   }, [breakTime, focusTime, round])
+
+  useEffect(() => {
+    if (init) {
+      init = false
+    } else {
+      notice(round)
+    }
+  }, [round])
 
   useEffect(() => {
     const url = createTrayImage(round, percent, paused)

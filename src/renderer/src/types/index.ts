@@ -10,6 +10,7 @@ export interface RoundInfo {
   strokeColor: string
   defaultMinutes: number
   title: string
+  noticeTitle:string
   body:string
 }
 
