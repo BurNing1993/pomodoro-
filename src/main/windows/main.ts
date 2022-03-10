@@ -1,7 +1,6 @@
 import { BrowserWindow } from 'electron'
 import * as path from 'path'
 import { IS_DEV } from '../constants'
-import { setTray } from '../tray'
 
 let win: BrowserWindow = null!
 
@@ -20,6 +19,7 @@ export function create() {
   })
   win.on('ready-to-show', () => {
     win.show()
+    // win.webContents.openDevTools()
   })
   if (IS_DEV) {
     win.loadURL('http://localhost:3000')

@@ -14,6 +14,9 @@ import { focusTimeState, breakTimeState } from '../../store/atoms'
 import { autoStartState } from '../../store/selectors'
 import { Round } from '../../types'
 import { ROUND_CONFIG } from '../../utils/constants'
+import { createTrayImage } from '../../utils'
+import { updateTrayIcon } from '../../utils/ipc'
+import { notice } from '../../utils/notice'
 
 dayjs.extend(duration)
 let timer: NodeJS.Timeout
@@ -50,9 +53,9 @@ const Timer: React.FC = () => {
       if (!autoStart) {
         setPaused(true)
       }
+      notice(round)
       const newRound: Round = round === 'FOCUS' ? 'BREAK' : 'FOCUS'
       setRound(newRound)
-      // TODO notice
     }
   }, [breakTime, focusTime, round, roundDuration, autoStart])
 
@@ -63,6 +66,11 @@ const Timer: React.FC = () => {
       setRoundDuration(dayjs.duration(breakTime, 'minute'))
     }
   }, [breakTime, focusTime, round])
+
+  useEffect(() => {
+    const url = createTrayImage(round, percent, paused)
+    updateTrayIcon(url)
+  }, [paused, percent, round])
 
   const skip = () => {
     const newRound: Round = round === 'FOCUS' ? 'BREAK' : 'FOCUS'
@@ -85,8 +93,8 @@ const Timer: React.FC = () => {
           width={200}
           percent={percent}
           showInfo={false}
-          strokeColor={ROUND_CONFIG[round].color}
-          trailColor={ROUND_CONFIG[round].trailColor}
+          strokeColor={ROUND_CONFIG[round].strokeColor}
+          trailColor={ROUND_CONFIG[round].color}
         />
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
           <div className="text-xl font-bold">{ROUND_CONFIG[round].title}</div>

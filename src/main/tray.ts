@@ -5,8 +5,7 @@ import {
   show as showMainWindow,
 } from './windows/main'
 
-/** @type Tray */
-let tray
+let tray: Tray = null!
 
 const appName = '番茄钟'
 
@@ -26,4 +25,8 @@ export function setTray() {
   tray.on('click', toggleShowMainWindow)
   tray.setToolTip(appName)
   tray.setTitle('This is my title')
+}
+
+export function setTrayIcon(image: string | Electron.NativeImage) {
+  tray.setImage(image)
 }

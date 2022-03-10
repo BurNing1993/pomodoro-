@@ -1,8 +1,8 @@
 {
   "name": "pomodoro",
   "version": "0.1.8",
-  "description": "",
-  "main": "./dist/main/index.js",
+  "description": "pomodoro",
+  "main": "./dist/main.js",
   "scripts": {
     "pack:win": "npm run build && electron-builder build --config electron-builder.config.js --win",
     "pack:mac": "npm run build && electron-builder build --config electron-builder.config.js --mac",
