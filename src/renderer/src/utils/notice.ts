@@ -2,9 +2,9 @@ import type { Round } from '../types'
 import { ROUND_CONFIG } from '../utils/constants'
 
 export function notice(currentRound: Round) {
-  const { title, body } = ROUND_CONFIG[currentRound]
+  const { noticeTitle, body } = ROUND_CONFIG[currentRound]
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const notification = new Notification(title + '结束了!', {
+  const notification = new Notification(noticeTitle, {
     body,
     // TODO
     // icon,

@@ -52,8 +52,11 @@ const Timer: React.FC = () => {
       const p = Math.round((1 - remain / (currentRoundMinutes * 60)) * 100)
       setPercent(p)
     } else {
-      if (!autoStart) {
-        setPaused(true)
+      setPaused(true)
+      if (autoStart) {
+        setTimeout(() => {
+          setPaused(false)
+        })
       }
       const newRound: Round = round === 'FOCUS' ? 'BREAK' : 'FOCUS'
       setRound(newRound)
