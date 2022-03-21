@@ -2,7 +2,7 @@
 @tailwind utilities;
 @tailwind base;
 
-@import '~antd/dist/antd.dark.css';
+@import '~antd/dist/antd.css';
 
 body{
   user-select: none;

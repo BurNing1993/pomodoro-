@@ -20,7 +20,6 @@ import { notice } from '../../utils/notice'
 
 dayjs.extend(duration)
 let timer: NodeJS.Timeout
-let init = true
 
 const Timer: React.FC = () => {
   const focusTime = useRecoilValue(focusTimeState)
@@ -31,12 +30,14 @@ const Timer: React.FC = () => {
   )
   const [round, setRound] = useState<Round>('FOCUS')
   const [paused, setPaused] = useState(true)
+  const [useNotice, setUseNotice] = useState(false)
   const [percent, setPercent] = useState(0)
 
   useEffect(() => {
     if (paused) {
       clearInterval(timer)
     } else {
+      setUseNotice(true)
       timer = setInterval(() => {
         setRoundDuration((d) => d.subtract(1, 'second'))
       }, 1000)
@@ -56,8 +57,11 @@ const Timer: React.FC = () => {
       }
       const newRound: Round = round === 'FOCUS' ? 'BREAK' : 'FOCUS'
       setRound(newRound)
+      if (useNotice) {
+        notice(newRound)
+      }
     }
-  }, [breakTime, focusTime, round, roundDuration, autoStart])
+  }, [breakTime, focusTime, round, roundDuration, autoStart, useNotice])
 
   useEffect(() => {
     if (round === 'FOCUS') {
@@ -68,14 +72,6 @@ const Timer: React.FC = () => {
   }, [breakTime, focusTime, round])
 
   useEffect(() => {
-    if (init) {
-      init = false
-    } else {
-      notice(round)
-    }
-  }, [round])
-
-  useEffect(() => {
     const url = createTrayImage(round, percent, paused)
     updateTrayIcon(url)
   }, [paused, percent, round])
@@ -83,6 +79,7 @@ const Timer: React.FC = () => {
   const skip = () => {
     const newRound: Round = round === 'FOCUS' ? 'BREAK' : 'FOCUS'
     setRound(newRound)
+    setUseNotice(false)
   }
   const reset = () => {
     if (round === 'FOCUS') {

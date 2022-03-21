@@ -17,7 +17,7 @@ const Setting: React.FC = () => {
   return (
     <div>
       <div
-        className="w-16 h-8  py-[10px] flex flex-col justify-between items-center cursor-pointer hover:bg-s-500"
+        className="w-16 h-8 py-[10px] flex flex-col justify-between items-center cursor-pointer"
         onClick={() => setVisible((v) => !v)}
       >
         <div
