@@ -31,7 +31,7 @@ const Timer: React.FC = () => {
       <div>
         <div className="py-2">{ROUND_CONFIG.BREAK.title}</div>
         <div>
-          <span className="bg-gray-400 py-1">{breakTime}:00</span>
+          <span className="bg-gray-400 p-1">{breakTime}:00</span>
         </div>
         <Slider
           handleStyle={{

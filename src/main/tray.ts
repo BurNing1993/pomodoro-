@@ -1,7 +1,6 @@
 import { app, Menu, Tray } from 'electron'
 import * as path from 'path'
 import {
-  toggleShow as toggleShowMainWindow,
   show as showMainWindow,
 } from './windows/main'
 
@@ -22,7 +21,7 @@ export function setTray() {
     },
   ])
   tray.setContextMenu(contextMenu)
-  tray.on('click', toggleShowMainWindow)
+  tray.on('click', showMainWindow)
   tray.setToolTip(appName)
   tray.setTitle('This is my title')
 }

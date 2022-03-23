@@ -35,6 +35,7 @@ const Timer: React.FC = () => {
 
   useEffect(() => {
     if (paused) {
+      setUseNotice(false)
       clearInterval(timer)
     } else {
       setUseNotice(true)
@@ -46,25 +47,27 @@ const Timer: React.FC = () => {
   }, [paused])
 
   useEffect(() => {
+    if (paused) {
+      return
+    }
     const remain = roundDuration.asSeconds()
     const currentRoundMinutes = round === 'FOCUS' ? focusTime : breakTime
     if (remain >= 0) {
       const p = Math.round((1 - remain / (currentRoundMinutes * 60)) * 100)
       setPercent(p)
     } else {
+      setRound((r) => (r === 'FOCUS' ? 'BREAK' : 'FOCUS'))
       setPaused(true)
       if (autoStart) {
         setTimeout(() => {
           setPaused(false)
-        })
+        }, 500)
       }
-      const newRound: Round = round === 'FOCUS' ? 'BREAK' : 'FOCUS'
-      setRound(newRound)
       if (useNotice) {
-        notice(newRound)
+        notice(round)
       }
     }
-  }, [breakTime, focusTime, round, roundDuration, autoStart, useNotice])
+  }, [breakTime, focusTime, round, roundDuration, autoStart, paused, useNotice])
 
   useEffect(() => {
     if (round === 'FOCUS') {
@@ -72,6 +75,7 @@ const Timer: React.FC = () => {
     } else {
       setRoundDuration(dayjs.duration(breakTime, 'minute'))
     }
+    setPercent(0)
   }, [breakTime, focusTime, round])
 
   useEffect(() => {

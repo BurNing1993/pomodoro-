@@ -3,7 +3,7 @@ import React, { memo } from 'react'
 const year = new Date().getFullYear()
 const appName = '番茄钟'
 const author = 'Joey'
-const version = '0.3.1'
+const version = 'v0.3.2'
 
 const About: React.FC = () => {
   return (
