@@ -4,6 +4,7 @@ import {
   close as closeMainWindow,
   minimize as minimizeMainWindow,
   toggleDevtools as toggleMainDevtools,
+  send as sendToMain,
 } from './windows/main'
 
 export type Theme = 'LIGHT' | 'DARK'
@@ -14,6 +15,7 @@ export const ipcEvent = {
   TOGGLE_DEVTOOLS: 'toggle_devtools',
   SET_THEME: 'set_theme',
   UPDATE_TRAY_ICON: 'update_tray_icon',
+  GET_ITCH_API: 'get_itch_api',
 }
 
 export default function handleIpc() {
@@ -36,5 +38,10 @@ export default function handleIpc() {
     } else {
       nativeTheme.themeSource = 'system'
     }
+  })
+
+  ipcMain.handle(ipcEvent.GET_ITCH_API, () => {
+    const ITCHIO_API_KEY = process.env.ITCHIO_API_KEY
+    sendToMain('itch_api', ITCHIO_API_KEY)
   })
 }

@@ -58,7 +58,10 @@ export function minimize() {
   win.minimize()
 }
 
-
-export function toggleDevtools(){
+export function toggleDevtools() {
   win.webContents.toggleDevTools()
+}
+
+export function send(channel: string, ...args: any[]) {
+  win.webContents.send(channel, ...args)
 }

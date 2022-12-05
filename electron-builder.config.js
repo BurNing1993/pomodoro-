@@ -1,7 +1,7 @@
 const { version, author } = require('./package.json')
 
 const year = new Date().getFullYear()
-const productName = '番茄钟'
+const productName = 'pomodoro'
 
 /**
  * @type {import('electron-builder').Configuration}
@@ -16,6 +16,10 @@ module.exports = {
     buildResources: 'resources',
   },
   files: ['./dist/**/*'],
+  extraFiles: {
+    from: './extraFiles/**/*',
+    to: './', // 根目录
+  },
   win: {
     icon: 'resources/icon.ico',
     target: {
@@ -55,7 +59,7 @@ module.exports = {
   extraMetadata: {
     version,
   },
-  publish:{
-    provider:'github',
+  publish: {
+    provider: 'github',
   },
 }

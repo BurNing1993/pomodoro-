@@ -7,6 +7,7 @@ export const ipcEvent = {
   TOGGLE_DEVTOOLS: 'toggle_devtools',
   UPDATE_TRAY_ICON: 'update_tray_icon',
   SET_THEME: 'set_theme',
+  GET_ITCH_API: 'get_itch_api',
 }
 
 export function closeWindow(quit = false) {
@@ -27,4 +28,8 @@ export function updateTrayIcon(imageUrl: string) {
 
 export function setNativeTheme(theme: Theme) {
   ipcRenderer.invoke(ipcEvent.SET_THEME, theme)
+}
+
+export function getItchApi(){
+  ipcRenderer.invoke(ipcEvent.GET_ITCH_API)
 }

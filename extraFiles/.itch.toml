@@ -1,0 +1,4 @@
+[[actions]]
+name = "editor"
+path = "pomodoro.exe"
+scope = "profile:me"
