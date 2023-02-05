@@ -1,0 +1,18 @@
+/* @tailwind base; */
+@tailwind components;
+@tailwind utilities;
+
+a {
+  text-decoration: none;
+}
+
+#nav .link {
+  color: #ffffffd9;
+  @apply text-base md:px-2 text-center;
+}
+#nav .link:hover {
+  @apply text-white;
+}
+#nav .link.active {
+  @apply font-bold text-green-400;
+}
