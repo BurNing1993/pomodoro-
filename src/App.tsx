@@ -14,7 +14,7 @@ const App: React.FC = () => {
         <section
           className="min-h-screen bg-center bg-no-repeat bg-cover bg-fixed"
           style={{
-            background: `url(${backgroundUrl})`,
+            backgroundImage: `url(${backgroundUrl})`,
           }}
         >
           <RouterProvider router={router} />

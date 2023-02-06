@@ -19,9 +19,10 @@ interface Props {
   todo: Todo
   onUpdate: (todo: Todo) => void
   onDelete: (todo: Todo) => void
+  onStart: (todo: Todo) => void
 }
 
-const TodoCard: React.FC<Props> = ({ todo, onUpdate, onDelete }) => {
+const TodoCard: React.FC<Props> = ({ todo, onUpdate, onDelete, onStart }) => {
   const onMenuClick: MenuProps['onClick'] = (e) => {
     console.log('click', e.key)
     if (e.key === 'update') {
@@ -31,17 +32,13 @@ const TodoCard: React.FC<Props> = ({ todo, onUpdate, onDelete }) => {
     }
   }
 
-  const onStart = () => {
-    console.log('开始')
-  }
-
   return (
     <Card hoverable>
       <div className="flex items-center justify-between">
         <div className="font-semibold">{todo.title}</div>
         <div>
           <Dropdown.Button
-            onClick={onStart}
+            onClick={() => onStart(todo)}
             menu={{ items, onClick: onMenuClick }}
           >
             开始

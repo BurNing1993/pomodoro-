@@ -7,12 +7,18 @@ a {
 }
 
 #nav .link {
-  color: #ffffffd9;
-  @apply text-base md:px-2 text-center;
+  @apply text-base text-slate-800 md:px-2 text-center;
+}
+#nav .link > span {
+  @apply px-1;
 }
 #nav .link:hover {
-  @apply text-white;
+  @apply text-blue-500;
 }
 #nav .link.active {
   @apply font-bold text-green-400;
+}
+
+#timer .ant-progress-text {
+  @apply text-white;
 }

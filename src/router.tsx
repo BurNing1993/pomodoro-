@@ -4,6 +4,7 @@ import ErrorLayout from './components/Error/ErrorLayout'
 import Error from './components/Error'
 import Home from './pages/home'
 import Statistics from './pages/statistics'
+import Timer from './pages/timer'
 
 const router = createBrowserRouter([
   {
@@ -19,6 +20,11 @@ const router = createBrowserRouter([
       {
         path:'statistics',
         element: <Statistics />,
+        errorElement: <Error />,
+      },
+      {
+        path:'timer',
+        element: <Timer />,
         errorElement: <Error />,
       },
     ],

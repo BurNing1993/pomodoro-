@@ -1,6 +1,7 @@
 import React, { memo, useCallback, useState } from 'react'
 import { Button, Modal, Form, Input, Row, Col } from 'antd'
 import { ExclamationCircleFilled, PlusOutlined } from '@ant-design/icons'
+import { useNavigate } from 'react-router-dom'
 import { useTodoList } from '../../context/TodoListContext'
 import type { Todo } from '../../context/TodoListContext'
 import TodoCard from '../../components/TodoCard'
@@ -10,6 +11,7 @@ const { confirm } = Modal
 type ActionType = 'add' | 'update'
 
 const Home: React.FC = () => {
+  const navigate = useNavigate()
   const { todoList, insertTodo, updateTodo, deleteTodo } = useTodoList()
   const [open, setOpen] = useState(false)
   const [type, setType] = useState<ActionType>('add')
@@ -49,22 +51,28 @@ const Home: React.FC = () => {
     },
     [form]
   )
-  const onDelete = useCallback((todo: Todo) => {
-    confirm({
-      title: (
-        <span>
-          确认删除待办事项
-          <span className="font-semibold text-blue-400">{todo.title}</span>?
-        </span>
-      ),
-      icon: <ExclamationCircleFilled />,
-      content: '删除后无法恢复!',
-      okType: 'danger',
-      onOk() {
-        deleteTodo(todo)
-      },
-    })
-  }, [])
+  const onDelete = useCallback(
+    (todo: Todo) => {
+      confirm({
+        title: (
+          <span>
+            确认删除待办事项
+            <span className="font-semibold text-blue-400">{todo.title}</span>?
+          </span>
+        ),
+        icon: <ExclamationCircleFilled />,
+        content: '删除后无法恢复!',
+        okType: 'danger',
+        onOk() {
+          deleteTodo(todo)
+        },
+      })
+    },
+    [deleteTodo]
+  )
+  const onStart = () => {
+    navigate('/timer')
+  }
 
   return (
     <div>
@@ -75,10 +83,15 @@ const Home: React.FC = () => {
         </Button>
       </div>
       <div className="py-4">
-        <Row gutter={[10,10]}>
+        <Row gutter={[10, 10]}>
           {todoList.map((todo) => (
             <Col key={todo.id} xs={24} sm={12} md={8} lg={6} xl={4}>
-              <TodoCard todo={todo} onUpdate={onUpdate} onDelete={onDelete} />
+              <TodoCard
+                todo={todo}
+                onUpdate={onUpdate}
+                onDelete={onDelete}
+                onStart={onStart}
+              />
             </Col>
           ))}
         </Row>
