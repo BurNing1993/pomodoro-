@@ -6,11 +6,11 @@ import logo from './logo-32x32.png'
 const AppLayout: React.FC = () => {
   return (
     <div className="min-h-screen">
-      <header className="shadow">
+      <header className="shadow bg-white">
         <div className="flex items-center container mx-auto h-10">
           <Link
             to="/"
-            className="flex items-center mr-1 md:mr-4 text-lg transition-colors duration-200 transform text-white hover:text-gray-300"
+            className="flex items-center mr-1 md:mr-4 text-lg transition-colors duration-200 transform hover:text-gray-300"
           >
             <img src={logo} alt="logo" />
             <span>番茄钟</span>

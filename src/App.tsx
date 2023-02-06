@@ -12,8 +12,10 @@ const App: React.FC = () => {
     <ConfigProvider locale={zhCN}>
       <TodoListProvider>
         <section
-          className="min-h-screen bg-black"
-          style={{ background: `url(${backgroundUrl}) no-repeat center fixed` }}
+          className="min-h-screen bg-center bg-no-repeat bg-cover bg-fixed"
+          style={{
+            background: `url(${backgroundUrl})`,
+          }}
         >
           <RouterProvider router={router} />
         </section>
