@@ -1,11 +1,11 @@
 import axios from 'axios'
 import { useEffect, useState } from 'react'
 
-const imageUrl =
-  'https://cn.bing.com/HPImageArchive.aspx?format=js&idx=0&n=1&nc=1612409408851&pid=hp&FORM=BEHPTB&uhd=1&uhdwidth=3840&uhdheight=2160&mkt=zh-CN'
+// const imageUrl =
+//   'https://cn.bing.com/HPImageArchive.aspx?format=js&idx=0&n=1&nc=1612409408851&pid=hp&FORM=BEHPTB&uhd=1&uhdwidth=3840&uhdheight=2160&mkt=zh-CN'
 
-const UA =
-  'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36 Edg/109.0.1518.78'
+const imageUrl =
+  '/bing/HPImageArchive.aspx?format=js&idx=0&n=1&nc=1612409408851&pid=hp&FORM=BEHPTB&uhd=1&uhdwidth=3840&uhdheight=2160&mkt=zh-CN'
 
 const BASE_URL = 'https://cn.bing.com'
 
@@ -22,13 +22,13 @@ export default function useBackground() {
     axios({
       url: imageUrl,
       method: 'GET',
-      headers: {
-        'User-Agent': UA,
-      },
+      // headers: {
+      //   'User-Agent': UA,
+      // },
     }).then((res) => {
       const { images } = res.data
-      if (images && images.length) {
-        const image = BASE_URL + images[0]
+      if (images && images.length > 0) {
+        const image = BASE_URL + images[0].url
         setBackgroundUrl(image)
         localStorage.setItem(LOCAL_BACK, image)
       }
