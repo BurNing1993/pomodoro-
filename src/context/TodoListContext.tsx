@@ -4,6 +4,7 @@ import type { PropsWithChildren } from 'react'
 export interface Todo {
   id: number
   title: string
+  done: number
 }
 
 interface TodoProps {

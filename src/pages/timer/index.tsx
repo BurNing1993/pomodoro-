@@ -1,8 +1,14 @@
 import React, { memo, useCallback, useEffect, useMemo, useState } from 'react'
-import { Button, Progress, Space } from 'antd'
+import { Button, Progress, Space, Modal } from 'antd'
+import { useNavigate, useSearchParams } from 'react-router-dom'
+import {
+  CaretRightOutlined,
+  ExclamationCircleFilled,
+  PauseOutlined,
+} from '@ant-design/icons'
 import { notify } from '../../utils'
-import { CaretRightOutlined, PauseOutlined } from '@ant-design/icons'
 import Stop from '../../components/Icons/Stop'
+import { Todo, useTodoList } from '../../context/TodoListContext'
 
 const WORK_SECONDS = 25 * 60
 const REST_SECONDS = 5 * 60
@@ -22,10 +28,15 @@ function format(s: number) {
 }
 
 const Timer: React.FC = () => {
+  const navigate = useNavigate()
+  const [param] = useSearchParams()
+  const { updateTodo, todoList } = useTodoList()
+
   const [total, setTotal] = useState(WORK_SECONDS)
   const [seconds, setSeconds] = useState(WORK_SECONDS)
   const [status, setStatus] = useState<'work' | 'rest'>('work')
   const [pause, setPause] = useState(false)
+  const [currentTodo, setCurrentTodo] = useState<Todo | null>(null)
 
   const start = useCallback(() => {
     console.log('start')
@@ -34,6 +45,17 @@ const Timer: React.FC = () => {
       setSeconds((s) => s - 1)
     }, 1000)
   }, [])
+
+  const id = useMemo(() => {
+    return Number(param.get('id'))
+  }, [param])
+
+  useEffect(() => {
+    const todo = todoList.find((t) => t.id === id)
+    if (todo) {
+      setCurrentTodo(todo)
+    }
+  }, [id, todoList])
 
   useEffect(() => {
     if (seconds <= 0) {
@@ -44,10 +66,15 @@ const Timer: React.FC = () => {
         setSeconds(REST_SECONDS)
       } else if (status === 'rest') {
         notify('休息一下!')
+        if (currentTodo) {
+          let done = currentTodo.done || 0
+          done += 1
+          updateTodo({ ...currentTodo, done })
+          navigate('/', { replace: true })
+        }
       }
-      return
     }
-  }, [seconds, status])
+  }, [currentTodo, navigate, seconds, status, updateTodo])
 
   const percent = useMemo(() => {
     const p = Math.round((1 - seconds / total) * 100)
@@ -67,6 +94,18 @@ const Timer: React.FC = () => {
       clearInterval(timer)
     }
   }, [pause, start])
+
+  const onStop = useCallback(() => {
+    Modal.confirm({
+      title: '确认停止该待办事项?',
+      icon: <ExclamationCircleFilled />,
+      content: '坚持就是胜利!',
+      okType: 'danger',
+      onOk() {
+        navigate('/', { replace: true })
+      },
+    })
+  }, [navigate])
 
   return (
     <div id="timer" className="text-center h-full flex flex-col justify-around">
@@ -108,7 +147,7 @@ const Timer: React.FC = () => {
             size="large"
             icon={<Stop />}
             shape="circle"
-            onClick={() => notify('hi')}
+            onClick={onStop}
           ></Button>
         </Space>
       </div>

@@ -26,7 +26,7 @@ const Home: React.FC = () => {
       .then((values) => {
         form.resetFields()
         if (type === 'add') {
-          const todo = { id: Date.now(), ...values }
+          const todo = { ...values, id: Date.now(), done: 0 }
           insertTodo(todo)
         } else if (type === 'update') {
           const todo = { ...currentTodo, ...values }
@@ -71,8 +71,8 @@ const Home: React.FC = () => {
     },
     [deleteTodo]
   )
-  const onStart = () => {
-    navigate('/timer')
+  const onStart = (todo: Todo) => {
+    navigate(`/timer?id=${todo.id}`)
   }
 
   useEffect(() => {

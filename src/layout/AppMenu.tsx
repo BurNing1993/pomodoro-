@@ -1,5 +1,9 @@
-import { ClockCircleOutlined, HomeOutlined } from '@ant-design/icons'
 import React, { memo } from 'react'
+import {
+  ClockCircleOutlined,
+  HomeOutlined,
+  PieChartOutlined,
+} from '@ant-design/icons'
 import { NavLink } from 'react-router-dom'
 
 const AppMenu: React.FC = () => {
@@ -8,6 +12,10 @@ const AppMenu: React.FC = () => {
       <NavLink to="/" className="link">
         <HomeOutlined />
         <span>首页</span>
+      </NavLink>
+      <NavLink to="/statistics" className="link">
+        <PieChartOutlined />
+        <span>统计</span>
       </NavLink>
       <NavLink to="/timer" className="link">
         <ClockCircleOutlined />

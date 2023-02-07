@@ -1,5 +1,7 @@
+import { message } from 'antd'
+
 export function notify(title: string, options?: NotificationOptions) {
-  console.log('notify', title,options);
+  console.log('notify', title, options)
   if (!('Notification' in window)) {
     // Check if the browser supports notifications
     alert('This browser does not support desktop notification')
@@ -15,6 +17,8 @@ export function notify(title: string, options?: NotificationOptions) {
       if (permission === 'granted') {
         const notification = new Notification('Hi there!')
         // …
+      } else {
+        message.info(title)
       }
     })
   }
@@ -24,6 +28,7 @@ export function notify(title: string, options?: NotificationOptions) {
 }
 
 export function requestNotificationPermission() {
+  console.log('requestNotificationPermission')
   if (!('Notification' in window)) {
     alert('This browser does not support desktop notification')
     return Promise.resolve(false)
