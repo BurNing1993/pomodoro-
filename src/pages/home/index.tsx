@@ -1,10 +1,11 @@
-import React, { memo, useCallback, useState } from 'react'
+import React, { memo, useCallback, useEffect, useState } from 'react'
 import { Button, Modal, Form, Input, Row, Col } from 'antd'
 import { ExclamationCircleFilled, PlusOutlined } from '@ant-design/icons'
 import { useNavigate } from 'react-router-dom'
 import { useTodoList } from '../../context/TodoListContext'
 import type { Todo } from '../../context/TodoListContext'
 import TodoCard from '../../components/TodoCard'
+import { requestNotificationPermission } from '../../utils'
 
 const { confirm } = Modal
 
@@ -73,6 +74,10 @@ const Home: React.FC = () => {
   const onStart = () => {
     navigate('/timer')
   }
+
+  useEffect(() => {
+    requestNotificationPermission()
+  }, [])
 
   return (
     <div>
