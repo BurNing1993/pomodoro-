@@ -8,10 +8,10 @@ import {
 } from '@ant-design/icons'
 import { notify } from '../../utils'
 import Stop from '../../components/Icons/Stop'
-import { Todo, useTodoList } from '../../context/TodoListContext'
+import { useTodoList } from '../../context/TodoListContext'
 
-const WORK_SECONDS = 25 * 60
-const REST_SECONDS = 5 * 60
+const WORK_SECONDS = 1 * 60
+const REST_SECONDS = 1 * 60
 
 let timer: number | undefined
 
@@ -36,26 +36,18 @@ const Timer: React.FC = () => {
   const [seconds, setSeconds] = useState(WORK_SECONDS)
   const [status, setStatus] = useState<'work' | 'rest'>('work')
   const [pause, setPause] = useState(false)
-  const [currentTodo, setCurrentTodo] = useState<Todo | null>(null)
 
   const start = useCallback(() => {
-    console.log('start')
     clearInterval(timer)
     timer = setInterval(() => {
       setSeconds((s) => s - 1)
     }, 1000)
   }, [])
 
-  const id = useMemo(() => {
-    return Number(param.get('id'))
-  }, [param])
-
-  useEffect(() => {
-    const todo = todoList.find((t) => t.id === id)
-    if (todo) {
-      setCurrentTodo(todo)
-    }
-  }, [id, todoList])
+  const currentTodo = useMemo(() => {
+    const id = Number(param.get('id'))
+    return todoList.find((t) => t.id === id)
+  }, [param, todoList])
 
   useEffect(() => {
     if (seconds <= 0) {
@@ -64,6 +56,7 @@ const Timer: React.FC = () => {
         setStatus('rest')
         setTotal(REST_SECONDS)
         setSeconds(REST_SECONDS)
+        start()
       } else if (status === 'rest') {
         notify('休息一下!')
         if (currentTodo) {
@@ -74,7 +67,7 @@ const Timer: React.FC = () => {
         }
       }
     }
-  }, [currentTodo, navigate, seconds, status, updateTodo])
+  }, [currentTodo, navigate, seconds, start, status, updateTodo])
 
   const percent = useMemo(() => {
     const p = Math.round((1 - seconds / total) * 100)
@@ -110,6 +103,7 @@ const Timer: React.FC = () => {
   return (
     <div id="timer" className="text-center h-full flex flex-col justify-around">
       <div className="py-6 text-white">
+        <h3 className="font-semibold tracking-widest">{currentTodo?.title}</h3>
         <span>你好</span>
       </div>
       <div>

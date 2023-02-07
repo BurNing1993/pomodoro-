@@ -1,16 +1,21 @@
 import React, { memo } from 'react'
-import { Outlet, Link } from 'react-router-dom'
+import { Outlet, Link, useLocation } from 'react-router-dom'
 import AppMenu from './AppMenu'
 import logo from './logo-32x32.png'
 
 const AppLayout: React.FC = () => {
+  const location = useLocation()
   return (
-    <div className="h-screen overflow-hidden flex flex-col-reverse md:flex-col">
-      <header className="shadow bg-white">
+    <div className="h-screen overflow-hidden flex flex-col">
+      <header
+        className={`shadow bg-white ${
+          location.pathname === '/timer' ? 'hidden' : 'block'
+        }`}
+      >
         <div className="flex items-center container mx-auto h-10">
           <Link
             to="/"
-            className="hidden md:flex justify-between md:justify-start items-center mr-1 md:mr-4 text-lg transition-colors duration-200 transform hover:text-gray-300"
+            className="flex justify-between md:justify-start items-center mr-1 md:mr-4 text-lg transition-colors duration-200 transform hover:text-gray-300"
           >
             <img src={logo} alt="logo" />
             <span>番茄钟</span>
