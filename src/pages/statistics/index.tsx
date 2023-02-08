@@ -56,7 +56,7 @@ const Statistics: React.FC = () => {
     return getOption(data)
   }, [todoList])
   return (
-    <div className="h-full">
+    <div style={{ height: 'calc(100vh - 70px)' }}>
       <Chart option={option} />
     </div>
   )

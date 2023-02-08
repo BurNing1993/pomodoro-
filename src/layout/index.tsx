@@ -6,9 +6,9 @@ import logo from './logo-32x32.png'
 const AppLayout: React.FC = () => {
   const location = useLocation()
   return (
-    <div className="h-screen overflow-hidden flex flex-col">
+    <div>
       <header
-        className={`shadow bg-white ${
+        className={`shadow bg-white sticky top-0 z-50 ${
           location.pathname === '/timer' ? 'hidden' : 'block'
         }`}
       >
@@ -23,7 +23,7 @@ const AppLayout: React.FC = () => {
           <AppMenu />
         </div>
       </header>
-      <main className="container mx-auto my-2 p-2 md:p-4 rounded flex-1">
+      <main className="container mx-auto px-2 py-4 md:px-4 md:py-6 rounded">
         <Outlet />
       </main>
     </div>

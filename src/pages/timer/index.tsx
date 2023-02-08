@@ -10,8 +10,8 @@ import { notify } from '../../utils'
 import Stop from '../../components/Icons/Stop'
 import { useTodoList } from '../../context/TodoListContext'
 
-const WORK_SECONDS = 1 * 60
-const REST_SECONDS = 1 * 60
+const WORK_SECONDS = 25 * 60
+const REST_SECONDS = 5 * 60
 
 let timer: number | undefined
 
@@ -102,9 +102,11 @@ const Timer: React.FC = () => {
 
   return (
     <div id="timer" className="text-center h-full flex flex-col justify-around">
-      <div className="py-6 text-white">
+      <div className="text-white py-20">
         <h3 className="font-semibold tracking-widest">{currentTodo?.title}</h3>
-        <span>你好</span>
+        <h4 className="font-semibold tracking-widest">
+          {status === 'work' ? '专注中' : '休息一下'}
+        </h4>
       </div>
       <div>
         <Progress
@@ -116,7 +118,7 @@ const Timer: React.FC = () => {
           format={() => format(seconds)}
         />
       </div>
-      <div className="mt-10">
+      <div className="pt-10">
         <Space>
           {pause ? (
             <Button
