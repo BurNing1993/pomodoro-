@@ -1,9 +1,8 @@
 import React, { memo, useMemo } from 'react'
-import Chart from '../../components/Chart'
-import type { EChartsOption } from 'echarts'
+import PieChart, { ECOption } from '../../components/PieChart'
 import { useTodoList } from '../../context/TodoListContext'
 
-function getOption(data: any): EChartsOption {
+function getOption(data: any): ECOption {
   return {
     tooltip: {
       trigger: 'item',
@@ -57,7 +56,7 @@ const Statistics: React.FC = () => {
   }, [todoList])
   return (
     <div style={{ height: 'calc(100vh - 80px)' }}>
-      <Chart option={option} />
+      <PieChart option={option} />
     </div>
   )
 }
