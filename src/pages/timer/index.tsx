@@ -58,7 +58,7 @@ const Timer: React.FC = () => {
         setSeconds(REST_SECONDS)
         start()
       } else if (status === 'rest') {
-        notify('休息一下!')
+        notify('休息一下!', 'rest', { body: '劳逸结合,提高效率!' })
         if (currentTodo) {
           let done = currentTodo.done || 0
           done += 1

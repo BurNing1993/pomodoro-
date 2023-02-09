@@ -82,7 +82,7 @@ const Home: React.FC = () => {
   const onRequestNotificationPermissionClick = () => {
     requestNotificationPermission().then((bool) => {
       if (bool) {
-        notify('已经获取通知权限!')
+        notify('已经获取通知权限!', 'rest', { body: '已经获取通知权限!' })
       } else {
         message.error('未获取通知权限!')
       }

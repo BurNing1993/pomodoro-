@@ -1,6 +1,17 @@
 import { message } from 'antd'
 
-function notice(title: string, options?: NotificationOptions) {
+function notice(
+  title: string,
+  status?: 'work' | 'rest',
+  option?: NotificationOptions
+) {
+  const options: NotificationOptions = {
+    lang: 'zh',
+    icon: '/logo.png',
+    image: status === 'rest' ? '/rest.png' : '/work.png',
+    vibrate: [200, 100, 200],
+    ...option,
+  }
   try {
     const notification = new Notification(title, options)
     return notification
@@ -17,22 +28,26 @@ function notice(title: string, options?: NotificationOptions) {
   }
 }
 
-export function notify(title: string, options?: NotificationOptions) {
-  console.log('notify', title, options)
+export function notify(
+  title: string,
+  status?: 'work' | 'rest',
+  options?: NotificationOptions
+) {
+  console.log('notify', status, title, options)
   if (!('Notification' in window)) {
     // Check if the browser supports notifications
     alert('This browser does not support desktop notification')
   } else if (Notification.permission === 'granted') {
     // Check whether notification permissions have already been granted;
     // if so, create a notification
-    notice(title, options)
+    notice(title, status, options)
     // …
   } else if (Notification.permission !== 'denied') {
     // We need to ask the user for permission
     Notification.requestPermission().then((permission) => {
       // If the user accepts, let's create a notification
       if (permission === 'granted') {
-        notice(title, options)
+        notice(title, status, options)
         // …
       } else {
         message.info(title)
