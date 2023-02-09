@@ -13,7 +13,7 @@ import { useTodoList } from '../../context/TodoListContext'
 const WORK_SECONDS = 25 * 60
 const REST_SECONDS = 5 * 60
 
-let timer: number | undefined
+let timer: string | number | NodeJS.Timeout | undefined
 
 function format(s: number) {
   let remain = s

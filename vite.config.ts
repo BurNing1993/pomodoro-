@@ -13,6 +13,7 @@ export default defineConfig({
         name: '番茄钟🍅',
         short_name: '番茄钟🍅',
         theme_color: '#ffffff',
+        lang: 'zh',
         icons: [
           {
             src: '/logo-192x192.png',
