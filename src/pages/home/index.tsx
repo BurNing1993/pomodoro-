@@ -1,11 +1,15 @@
-import React, { memo, useCallback, useEffect, useState } from 'react'
-import { Button, Modal, Form, Input, Row, Col } from 'antd'
-import { ExclamationCircleFilled, PlusOutlined } from '@ant-design/icons'
+import React, { memo, useCallback, useState } from 'react'
+import { Button, Modal, Form, Input, Row, Col, Space, message } from 'antd'
+import {
+  ExclamationCircleFilled,
+  NotificationOutlined,
+  PlusOutlined,
+} from '@ant-design/icons'
 import { useNavigate } from 'react-router-dom'
 import { useTodoList } from '../../context/TodoListContext'
 import type { Todo } from '../../context/TodoListContext'
 import TodoCard from '../../components/TodoCard'
-import { requestNotificationPermission } from '../../utils'
+import { notify, requestNotificationPermission } from '../../utils'
 
 const { confirm } = Modal
 
@@ -75,17 +79,34 @@ const Home: React.FC = () => {
     navigate(`/timer?id=${todo.id}`)
   }
 
-  useEffect(() => {
-    requestNotificationPermission()
-  }, [])
+  const onRequestNotificationPermissionClick = () => {
+    requestNotificationPermission().then((bool) => {
+      if (bool) {
+        notify('已经获取通知权限!')
+      } else {
+        message.error('未获取通知权限!')
+      }
+    })
+  }
 
   return (
     <div>
       <div className="border bg-white border-solid border-slate-200 p-2 rounded-md flex items-center justify-between">
         <div className="font-semibold">待 办</div>
-        <Button type="primary" icon={<PlusOutlined />} onClick={onInsert}>
-          添加
-        </Button>
+        <Space>
+          {(Notification.permission === 'denied' ||
+            Notification.permission === 'default') && (
+            <Button
+              icon={<NotificationOutlined />}
+              onClick={onRequestNotificationPermissionClick}
+            >
+              获取通知权限
+            </Button>
+          )}
+          <Button type="primary" icon={<PlusOutlined />} onClick={onInsert}>
+            添加
+          </Button>
+        </Space>
       </div>
       <div className="py-4">
         <Row gutter={[10, 10]}>

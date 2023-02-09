@@ -15,7 +15,7 @@ const AppLayout: React.FC = () => {
         <div className="flex items-center container mx-auto h-10">
           <Link
             to="/"
-            className="flex justify-between md:justify-start items-center mr-1 md:mr-4 text-lg transition-colors duration-200 transform hover:text-gray-300"
+            className="flex justify-between md:justify-start items-center mr-1 md:mr-4 text-lg transition-colors duration-200 transform hover:text-slate-800"
           >
             <img src={logo} alt="logo" />
             <span>番茄钟</span>
