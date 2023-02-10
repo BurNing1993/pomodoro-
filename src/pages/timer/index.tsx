@@ -89,16 +89,25 @@ const Timer: React.FC = () => {
   }, [pause, start])
 
   const onStop = useCallback(() => {
-    Modal.confirm({
-      title: '确认停止该待办事项?',
-      icon: <ExclamationCircleFilled />,
-      content: '坚持就是胜利!',
-      okType: 'danger',
-      onOk() {
+    if (status === 'work') {
+      Modal.confirm({
+        title: '确认停止该待办事项?',
+        icon: <ExclamationCircleFilled />,
+        content: '坚持就是胜利!',
+        okType: 'danger',
+        onOk() {
+          navigate('/', { replace: true })
+        },
+      })
+    } else {
+      if (currentTodo) {
+        let done = currentTodo.done || 0
+        done += 1
+        updateTodo({ ...currentTodo, done })
         navigate('/', { replace: true })
-      },
-    })
-  }, [navigate])
+      }
+    }
+  }, [currentTodo, navigate, status, updateTodo])
 
   return (
     <div id="timer" className="text-center h-full flex flex-col justify-around">
