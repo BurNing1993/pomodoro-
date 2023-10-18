@@ -1,8 +1,0 @@
-[[redirects]]
-  from = "/bing/*"
-  to = "https://cn.bing.com/:splat"
-  status = 200
-[[redirects]]
-  from = "/*"
-  to = "/"
-  status = 200

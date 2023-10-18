@@ -1,0 +1,54 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.draggable {
+  -webkit-app-region: drag;
+}
+
+.nonDraggable {
+  -webkit-app-region: no-drag;
+}
+
+#titlebar-container {
+  position: fixed;
+  top: env(titlebar-area-y, 0);
+  height: env(titlebar-area-height, var(--fallback-title-bar-height));
+  width: 100%;
+  cursor: pointer;
+  z-index: 99;
+  box-sizing: content-box;
+}
+
+#titlebar {
+  position: absolute;
+  top: 0;
+  display: flex;
+  height: 100%;
+  left: env(titlebar-area-x, 0);
+  width: env(titlebar-area-width, 100%);
+  text-align: center;
+}
+
+#main {
+  height: calc(
+    100vh - env(titlebar-area-height, var(--fallback-title-bar-height))
+  );
+  margin-top: env(titlebar-area-height, var(--fallback-title-bar-height));
+}
+
+a.active {
+  @apply text-primary;
+}
+
+/* 使用 CSS 隐藏箭头 */
+input[type='number']::-webkit-inner-spin-button,
+input[type='number']::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* 也可以尝试这个针对所有浏览器的方法 */
+input[type='number'] {
+  -moz-appearance: textfield;
+}
