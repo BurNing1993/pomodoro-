@@ -25,7 +25,7 @@ const Header: React.FC = () => {
         {pathname === '/' && (
           <button
             className="btn btn-sm btn-ghost ml-4"
-            onClick={() => emitter.emit('addEvent')}
+            onClick={() => emitter.emit('addTask')}
           >
             <FluentAdd />
             <span>待办</span>

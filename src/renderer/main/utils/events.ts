@@ -1,7 +1,7 @@
 import mitt from 'mitt'
 
 type Events = {
-  addEvent: void
+  addTask: void
 }
 
 const emitter = mitt<Events>() // inferred as Emitter<Events>

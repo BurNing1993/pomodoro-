@@ -4,5 +4,5 @@ export interface Task {
   type: 'tomato' | 'foucs'
   foucs: number
   rest: number
-  timer: 'alwaysOnTop' | 'tray'
+  // timer: 'alwaysOnTop' | 'tray' 
 }
